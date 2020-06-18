@@ -1,0 +1,565 @@
+<html>
+
+  <head>
+
+  <meta charset="UTF-8">
+   <meta name="description" content="demo.visualise.today: foo">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+   <meta name="apple-mobile-web-app-capable" content="yes">
+   <meta name="mobile-web-app-capable" content="yes">
+
+   <title>#travelmap</title>
+
+   <link rel="stylesheet" href="lib/leaflet.css">
+
+   <script src="lib/leaflet.js"></script>
+
+   <script src="lib/leaflet.markercluster.js"></script>
+
+   <link rel="stylesheet" href="lib/Leaflet.Photo.css">
+
+   <script src="lib/Leaflet.Photo.js"></script>
+
+   <link rel="stylesheet" href="lib/MarkerCluster.css">
+
+   <link rel="stylesheet" href="lib/easy-button.css">
+
+   <script src="lib/easy-button.js"></script>
+
+   <link rel="stylesheet" href="lib/font-awesome.min.css">
+
+    <style>
+
+    html,
+    body,
+    #map {
+      height: 100%;
+      width: 100%;
+      padding: 0px;
+      margin: 0px;
+    }
+
+    </style>
+
+  </head>
+
+  <body>
+
+    <div id='map'></div>
+
+    <script>
+
+    var map = L.map('map', {
+  center: [35, 15],
+  zoom: 2
+});
+
+L.tileLayer('http://a.tiles.mapbox.com/v4/mapbox.satellite/{z}/{x}/{y}.png?access_token=pk.eyJ1Ijoid2FuZGFib2RuYXIiLCJhIjoiY2p0NXU3djg5MDNrZzN6bnpoaGx6MmMzMCJ9.1ZSsBHP1VNrORNIN_p0_Xg',
+{maxZoom: 19, minZoom: 2, attribution: '&copy; <a href="https://www.linkedin.com/in/wandabodnar/">Wanda Bodnar</a>'}).addTo(map);
+
+var photos = [{
+    "lat": 73.31503,
+    "lng": -26.39936,
+    "url": "http://res.cloudinary.com/wandabodnar/image/upload/v1536923775/Greenland/Iceberg.jpg",
+    "thumbnail": "http://res.cloudinary.com/wandabodnar/image/upload/v1536923775/Greenland/Iceberg.jpg"
+  }, {
+    "lat": 72.25164,
+    "lng": -23.74146,
+    "url": "http://res.cloudinary.com/wandabodnar/image/upload/v1536933623/Greenland/DSC_0546.jpg",
+    "thumbnail": "http://res.cloudinary.com/wandabodnar/image/upload/v1536933623/Greenland/DSC_0546.jpg"
+  }, {
+    "lat": 72.4193,
+    "lng": -24.52942,
+    "url": "http://res.cloudinary.com/wandabodnar/image/upload/v1536933613/Greenland/DSC_0569.jpg",
+    "thumbnail": "http://res.cloudinary.com/wandabodnar/image/upload/v1536933613/Greenland/DSC_0569.jpg"
+  },  {
+    "lat": 72.87802,
+    "lng": -25.11142,
+    "url": "http://res.cloudinary.com/wandabodnar/image/upload/v1536933613/Greenland/DSC_0588.jpg",
+    "thumbnail": "http://res.cloudinary.com/wandabodnar/image/upload/v1536933613/Greenland/DSC_0588.jpg"
+  }, {
+    "lat": 72.876037,
+    "lng": -25.106862,
+    "url": "http://res.cloudinary.com/wandabodnar/image/upload/v1536934448/Greenland/IMGP8308.jpg",
+    "thumbnail": "http://res.cloudinary.com/wandabodnar/image/upload/v1536934448/Greenland/IMGP8308.jpg"
+  }, {
+    "lat": 47.499530,
+    "lng": 19.046277,
+    "url": "http://res.cloudinary.com/wandabodnar/image/upload/v1536934935/20.jpg",
+    "thumbnail": "http://res.cloudinary.com/wandabodnar/image/upload/v1536934935/20.jpg"
+  }, {
+    "lat": 51.501031,
+    "lng": -0.056287,
+    "url": "http://res.cloudinary.com/wandabodnar/image/upload/v1536934931/DSC_0271.jpg",
+    "thumbnail": "http://res.cloudinary.com/wandabodnar/image/upload/v1536934931/DSC_0271.jpg"
+  }, {
+    "lat": 50.757160,
+    "lng": 0.149094,
+    "url": "http://res.cloudinary.com/wandabodnar/image/upload/v1536934910/DSC_0081.jpg",
+    "thumbnail": "http://res.cloudinary.com/wandabodnar/image/upload/v1536934910/DSC_0081.jpg"
+  }, {
+    "lat": 40.693317,
+    "lng": -74.003881,
+    "url": "http://res.cloudinary.com/wandabodnar/image/upload/v1536935868/NYC/DSC_0103.jpg",
+    "thumbnail": "http://res.cloudinary.com/wandabodnar/image/upload/v1536935868/NYC/DSC_0103.jpg"
+  }, {
+    "lat": 40.693200,
+    "lng": -74.018975,
+    "url": "http://res.cloudinary.com/wandabodnar/image/upload/v1536935878/NYC/DSC_0242.jpg",
+    "thumbnail": "http://res.cloudinary.com/wandabodnar/image/upload/v1536935878/NYC/DSC_0242.jpg"
+  }, {
+    "lat": 40.706621,
+    "lng": -73.997514,
+    "url": "http://res.cloudinary.com/wandabodnar/image/upload/a_auto_right/a_0/v1536935895/NYC/DSC_0140.jpg",
+    "thumbnail": "http://res.cloudinary.com/wandabodnar/image/upload/a_auto_right/a_0/v1536935895/NYC/DSC_0140.jpg"
+  }, {
+    "lat": -28.634277,
+    "lng": 153.637806,
+    "url": "http://res.cloudinary.com/wandabodnar/image/upload/v1536937295/Australia/IMG_4466.jpg",
+    "thumbnail": "http://res.cloudinary.com/wandabodnar/image/upload/v1536937295/Australia/IMG_4466.jpg"
+  }, {
+    "lat": 35.6604256,
+    "lng": 139.7287552,
+    "url": "http://res.cloudinary.com/wandabodnar/image/upload/v1536937866/Japan/IMG_3721.jpg",
+    "thumbnail": "http://res.cloudinary.com/wandabodnar/image/upload/v1536937866/Japan/IMG_3721.jpg"
+  }, {
+    "lat": 34.6889895,
+    "lng": 135.8376271,
+    "url": "http://res.cloudinary.com/wandabodnar/image/upload/a_auto_right/v1536937832/Japan/IMG_3685.jpg",
+    "thumbnail": "http://res.cloudinary.com/wandabodnar/image/upload/a_auto_right/v1536937832/Japan/IMG_3685.jpg"
+  }, {
+    "lat": 34.677799,
+    "lng": 135.8291093,
+    "url": "http://res.cloudinary.com/wandabodnar/image/upload/v1536937851/Japan/IMG_3700.jpg",
+    "thumbnail": "http://res.cloudinary.com/wandabodnar/image/upload/v1536937851/Japan/IMG_3700.jpg"
+  }, {
+    "lat": 73.77839,
+    "lng": -24.29817,
+    "url": "http://res.cloudinary.com/wandabodnar/image/upload/v1536997896/Greenland/DSC_0883.jpg",
+    "thumbnail": "http://res.cloudinary.com/wandabodnar/image/upload/v1536997896/Greenland/DSC_0883.jpg"
+  }, {
+    "lat": 73.79918,
+    "lng": -24.19144,
+    "url": "http://res.cloudinary.com/wandabodnar/image/upload/v1536997918/Greenland/DSC_0892.jpg",
+    "thumbnail": "http://res.cloudinary.com/wandabodnar/image/upload/v1536997918/Greenland/DSC_0892.jpg"
+  }, {
+    "lat": 73.3291,
+    "lng": -25.24169,
+    "url": "http://res.cloudinary.com/wandabodnar/image/upload/v1536997945/Greenland/DSC_0832.jpg",
+    "thumbnail": "http://res.cloudinary.com/wandabodnar/image/upload/v1536997945/Greenland/DSC_0832.jpg"
+  }, {
+    "lat": 64.142248,
+    "lng": -21.9280721,
+    "url": "http://res.cloudinary.com/wandabodnar/image/upload/a_auto_right/a_0/v1536998292/Iceland/DSC_0486.jpg",
+    "thumbnail": "http://res.cloudinary.com/wandabodnar/image/upload/a_auto_right/a_0/v1536998292/Iceland/DSC_0486.jpg"
+  }, {
+    "lat": 64.1461652,
+    "lng": -21.932754,
+    "url": "http://res.cloudinary.com/wandabodnar/image/upload/a_auto_right/v1536998384/Iceland/DSC_0489.jpg",
+    "thumbnail": "http://res.cloudinary.com/wandabodnar/image/upload/a_auto_right/v1536998384/Iceland/DSC_0489.jpg"
+  }, {
+    "lat": 64.144965,
+    "lng": -21.939488,
+    "url": "http://res.cloudinary.com/wandabodnar/image/upload/v1536998352/Iceland/DSC_0457.jpg",
+    "thumbnail": "http://res.cloudinary.com/wandabodnar/image/upload/v1536998352/Iceland/DSC_0457.jpg"
+  }, {
+    "lat": 64.327084,
+    "lng": -20.121115,
+    "url": "http://res.cloudinary.com/wandabodnar/image/upload/v1536998484/Iceland/DSC_0020_1.jpg",
+    "thumbnail": "http://res.cloudinary.com/wandabodnar/image/upload/v1536998484/Iceland/DSC_0020_1.jpg"
+  }, {
+    "lat": 64.312454,
+    "lng": -20.300375,
+    "url": "http://res.cloudinary.com/wandabodnar/image/upload/a_auto_right/v1536998432/Iceland/DSC_0002.jpg",
+    "thumbnail": "http://res.cloudinary.com/wandabodnar/image/upload/a_auto_right/v1536998432/Iceland/DSC_0002.jpg"
+  }, {
+    "lat": 64.261121,
+    "lng": -21.121524,
+    "url": "http://res.cloudinary.com/wandabodnar/image/upload/v1536999322/Iceland/DSC_1000.jpg",
+    "thumbnail": "http://res.cloudinary.com/wandabodnar/image/upload/v1536999322/Iceland/DSC_1000.jpg"
+  }, {
+    "lat": -20.280334,
+    "lng": 149.037497,
+    "url": "http://res.cloudinary.com/wandabodnar/image/upload/v1536999429/Australia/IMG_4190.jpg",
+    "thumbnail": "http://res.cloudinary.com/wandabodnar/image/upload/v1536999429/Australia/IMG_4190.jpg"
+  }, {
+    "lat": -27.478977,
+    "lng": 153.034067,
+    "url": "http://res.cloudinary.com/wandabodnar/image/upload/v1536999477/Australia/IMG_4384.jpg",
+    "thumbnail": "http://res.cloudinary.com/wandabodnar/image/upload/v1536999477/Australia/IMG_4384.jpg"
+  }, {
+    "lat": -25.046455,
+    "lng": 152.986049,
+    "url": "http://res.cloudinary.com/wandabodnar/image/upload/v1536999468/Australia/IMG_4328.jpg",
+    "thumbnail": "http://res.cloudinary.com/wandabodnar/image/upload/v1536999468/Australia/IMG_4328.jpg"
+  }, {
+    "lat": 34.102561,
+    "lng": -118.339342,
+    "url": "http://res.cloudinary.com/wandabodnar/image/upload/v1537115787/Other/LA.jpg",
+    "thumbnail": "http://res.cloudinary.com/wandabodnar/image/upload/v1537115787/Other/LA.jpg"
+  }, {
+    "lat": 33.972844,
+    "lng": -118.482101,
+    "url": "http://res.cloudinary.com/wandabodnar/image/upload/v1537115784/Other/LA1.jpg",
+    "thumbnail": "http://res.cloudinary.com/wandabodnar/image/upload/v1537115784/Other/LA1.jpg"
+  }, {
+    "lat": 38.6900391,
+    "lng": -9.426097,
+    "url": "http://res.cloudinary.com/wandabodnar/image/upload/v1537115814/Other/DSC_0273.jpg",
+    "thumbnail": "http://res.cloudinary.com/wandabodnar/image/upload/v1537115814/Other/DSC_0273.jpg"
+  }, {
+    "lat": 38.6918,
+    "lng": -9.421706,
+    "url": "http://res.cloudinary.com/wandabodnar/image/upload/a_auto_right/v1537115829/Other/DSC_0269.jpg",
+    "thumbnail": "http://res.cloudinary.com/wandabodnar/image/upload/a_auto_right/v1537115829/Other/DSC_0269.jpg"
+  }, {
+    "lat": 38.693868,
+    "lng": -9.205661,
+    "url": "http://res.cloudinary.com/wandabodnar/image/upload/v1537115845/Other/DSC_0215.jpg",
+    "thumbnail": "http://res.cloudinary.com/wandabodnar/image/upload/v1537115845/Other/DSC_0215.jpg"
+  }, {
+    "lat": 38.71473,
+    "lng": -9.1322927,
+    "url": "http://res.cloudinary.com/wandabodnar/image/upload/v1537115845/Other/DSC_0100.jpg",
+    "thumbnail": "http://res.cloudinary.com/wandabodnar/image/upload/v1537115845/Other/DSC_0100.jpg"
+  }, {
+    "lat": -16.9183,
+    "lng": 145.776352,
+    "url": "http://res.cloudinary.com/wandabodnar/image/upload/v1537117567/Australia/IMG_3850.jpg",
+    "thumbnail": "http://res.cloudinary.com/wandabodnar/image/upload/v1537117567/Australia/IMG_3850.jpg"
+  }, {
+    "lat": -16.9311,
+    "lng": 145.9888861,
+    "url": "http://res.cloudinary.com/wandabodnar/image/upload/v1537117567/Australia/IMG_3900.jpg",
+    "thumbnail": "http://res.cloudinary.com/wandabodnar/image/upload/v1537117567/Australia/IMG_3900.jpg"
+  }, {
+    "lat": -18.271,
+    "lng": 146.03445,
+    "url": "http://res.cloudinary.com/wandabodnar/image/upload/v1537117567/Australia/IMG_4047.jpg",
+    "thumbnail": "http://res.cloudinary.com/wandabodnar/image/upload/v1537117567/Australia/IMG_4047.jpg"
+  }, {
+    "lat": -19.242425,
+    "lng": 146.79214,
+    "url": "http://res.cloudinary.com/wandabodnar/image/upload/v1537117567/Australia/IMG_4068.jpg",
+    "thumbnail": "http://res.cloudinary.com/wandabodnar/image/upload/v1537117567/Australia/IMG_4068.jpg"
+  }, {
+    "lat": -22.119738,
+    "lng": 149.5363916,
+    "url": "http://res.cloudinary.com/wandabodnar/image/upload/v1537117567/Australia/IMG_4213.jpg",
+    "thumbnail": "http://res.cloudinary.com/wandabodnar/image/upload/v1537117567/Australia/IMG_4213.jpg"
+  }, {
+    "lat": -16.7710987,
+    "lng": 146.2299802,
+    "url": "http://res.cloudinary.com/wandabodnar/image/upload/v1537117905/Australia/GOPR3077.jpg",
+    "thumbnail": "http://res.cloudinary.com/wandabodnar/image/upload/v1537117905/Australia/GOPR3077.jpg"
+  }, {
+    "lat": 58.397683,
+    "lng": -6.397683,
+    "url": "http://res.cloudinary.com/wandabodnar/image/upload/v1537000373/Other/DSC_0447.jpg",
+    "thumbnail": "http://res.cloudinary.com/wandabodnar/image/upload/v1537000373/Other/DSC_0447.jpg"
+  }, {
+    "lat": 26.017473,
+    "lng": 35.256178,
+    "url": "http://res.cloudinary.com/wandabodnar/image/upload/v1537119289/Other/ham.jpg",
+    "thumbnail": "http://res.cloudinary.com/wandabodnar/image/upload/v1537119289/Other/ham.jpg"
+  }, {
+    "lat": 43.283234,
+    "lng": 31.300108,
+    "url": "http://res.cloudinary.com/wandabodnar/image/upload/v1537119605/Other/IMGP2539.jpg",
+    "thumbnail": "http://res.cloudinary.com/wandabodnar/image/upload/v1537119605/Other/IMGP2539.jpg"
+  }, {
+    "lat": 41.900797,
+    "lng": 12.483470,
+    "url": "https://res.cloudinary.com/wandabodnar/image/upload/v1538316832/Other/rome.jpg",
+    "thumbnail": "https://res.cloudinary.com/wandabodnar/image/upload/v1538316832/Other/rome.jpg"
+  }, {
+    "lat": 52.090717,
+    "lng": 5.1212557,
+    "url": "https://res.cloudinary.com/wandabodnar/image/upload/v1538316815/Other/utrecht.jpg",
+    "thumbnail": "https://res.cloudinary.com/wandabodnar/image/upload/v1538316815/Other/utrecht.jpg"
+  }, {
+    "lat": 45.432115,
+    "lng": 12.337327,
+    "url": "https://res.cloudinary.com/wandabodnar/image/upload/v1538316830/Other/venice.jpg",
+    "thumbnail": "https://res.cloudinary.com/wandabodnar/image/upload/v1538316830/Other/venice.jpg"
+  }, {
+    "lat": 36.461544,
+    "lng": 25.374464,
+    "url": "https://res.cloudinary.com/wandabodnar/image/upload/v1538316798/Other/santorini.jpg",
+    "thumbnail": "https://res.cloudinary.com/wandabodnar/image/upload/v1538316798/Other/santorini.jpg"
+  }, {
+    "lat": 52.505055,
+    "lng": 13.439654,
+    "url": "https://res.cloudinary.com/wandabodnar/image/upload/v1538316791/Other/berlin.jpg",
+    "thumbnail": "https://res.cloudinary.com/wandabodnar/image/upload/v1538316791/Other/berlin.jpg"
+  }, {
+    "lat": 41.902134,
+    "lng": 12.453401,
+    "url": "https://res.cloudinary.com/wandabodnar/image/upload/v1538316778/Other/vatican.jpg",
+    "thumbnail": "https://res.cloudinary.com/wandabodnar/image/upload/v1538316778/Other/vatican.jpg"
+  }, {
+    "lat": 50.433538,
+    "lng": -5.051888,
+    "url": "https://res.cloudinary.com/wandabodnar/image/upload/c_scale,w_2500/v1538316777/Other/newquay.jpg",
+    "thumbnail": "https://res.cloudinary.com/wandabodnar/image/upload/c_scale,w_2500/v1538316777/Other/newquay.jpg"
+  }, {
+    "lat": 52.372835,
+    "lng": 4.875836,
+    "url": "https://res.cloudinary.com/wandabodnar/image/upload/a_auto_right/v1538316762/Other/ams.jpg",
+    "thumbnail": "https://res.cloudinary.com/wandabodnar/image/upload/a_auto_right/v1538316762/Other/ams.jpg"
+  }, {
+    "lat": 48.861129,
+    "lng": 2.363157,
+    "url": "https://res.cloudinary.com/wandabodnar/image/upload/v1556279029/Paris/DSCPDC_0003_BURST20181125135629433_COVER.jpg",
+    "thumbnail": "https://res.cloudinary.com/wandabodnar/image/upload/v1556279029/Paris/DSCPDC_0003_BURST20181125135629433_COVER.jpg"
+  }, {
+    "lat": 48.853128,
+    "lng": 2.348795,
+    "url": "https://res.cloudinary.com/wandabodnar/image/upload/a_auto_right/a_0/v1556278997/Paris/DSC_0117.jpg",
+    "thumbnail": "https://res.cloudinary.com/wandabodnar/image/upload/a_auto_right/a_0/v1556278997/Paris/DSC_0117.jpg"
+  }, {
+    "lat": 48.8611231,
+    "lng": 2.3363753,
+    "url": "https://res.cloudinary.com/wandabodnar/image/upload/v1556278985/Paris/DSC_0131.jpg",
+    "thumbnail": "https://res.cloudinary.com/wandabodnar/image/upload/v1556278985/Paris/DSC_0131.jpg"
+  }, {
+    "lat": 55.6812558,
+    "lng": 12.5759997,
+    "url": "https://res.cloudinary.com/wandabodnar/image/upload/v1556279666/Copenhagen/DSC_0164.jpg",
+    "thumbnail": "https://res.cloudinary.com/wandabodnar/image/upload/v1556279666/Copenhagen/DSC_0164.jpg"
+  }, {
+    "lat": 55.6800294,
+    "lng": 12.5902789,
+    "url": "https://res.cloudinary.com/wandabodnar/image/upload/v1556279657/Copenhagen/DSC_0146.jpg",
+    "thumbnail": "https://res.cloudinary.com/wandabodnar/image/upload/v1556279657/Copenhagen/DSC_0146.jpg"
+  }, {
+    "lat": 55.6928333,
+    "lng": 12.5991806,
+    "url": "https://res.cloudinary.com/wandabodnar/image/upload/a_auto_right/v1556279639/Copenhagen/DSC_0128.jpg",
+    "thumbnail": "https://res.cloudinary.com/wandabodnar/image/upload/a_auto_right/v1556279639/Copenhagen/DSC_0128.jpg"
+  }, {
+    "lat": 41.7857411,
+    "lng": 12.2238681,
+    "url": "https://res.cloudinary.com/wandabodnar/image/upload/v1556280341/DSC_0005_4.jpg",
+    "thumbnail": "https://res.cloudinary.com/wandabodnar/image/upload/v1556280341/DSC_0005_4.jpg"
+  }, {
+    "lat": 36.2935582,
+    "lng": 140.281903,
+    "url": "https://res.cloudinary.com/wandabodnar/image/upload/v1556280574/Japan%202/DSC_0013_4.jpg",
+    "thumbnail": "https://res.cloudinary.com/wandabodnar/image/upload/v1556280574/Japan%202/DSC_0013_4.jpg"
+  }, {
+    "lat": 36.2968291,
+    "lng": 140.2614529,
+    "url": "https://res.cloudinary.com/wandabodnar/image/upload/v1556280672/Japan%202/DSC_0023_3.jpg",
+    "thumbnail": "https://res.cloudinary.com/wandabodnar/image/upload/v1556280672/Japan%202/DSC_0023_3.jpg"
+  }, {
+    "lat": 35.31674,
+    "lng": 139.535923,
+    "url": "https://res.cloudinary.com/wandabodnar/image/upload/v1556280785/Japan%202/DSCPDC_0000_BURST20190410161930429.jpg",
+    "thumbnail": "https://res.cloudinary.com/wandabodnar/image/upload/v1556280785/Japan%202/DSCPDC_0000_BURST20190410161930429.jpg"
+  }, {
+    "lat": 35.308477,
+    "lng": 139.533990,
+    "url": "https://res.cloudinary.com/wandabodnar/image/upload/v1556280950/Japan%202/DSC_0055_2.jpg",
+    "thumbnail": "https://res.cloudinary.com/wandabodnar/image/upload/v1556280950/Japan%202/DSC_0055_2.jpg"
+  }, {
+    "lat": 35.311461,
+    "lng": 139.5317393,
+    "url": "https://res.cloudinary.com/wandabodnar/image/upload/v1556281141/Japan%202/DSC_0068_2.jpg",
+    "thumbnail": "https://res.cloudinary.com/wandabodnar/image/upload/v1556281141/Japan%202/DSC_0068_2.jpg"
+  }, {
+    "lat": 35.1424641,
+    "lng": 139.1579675,
+    "url": "https://res.cloudinary.com/wandabodnar/image/upload/v1556281278/Japan%202/DSC_0093_3.jpg",
+    "thumbnail": "https://res.cloudinary.com/wandabodnar/image/upload/v1556281278/Japan%202/DSC_0093_3.jpg"
+  }, {
+    "lat": 34.890246,
+    "lng": 138.9254593,
+    "url": "https://res.cloudinary.com/wandabodnar/image/upload/v1556281460/Japan%202/DSC_0108_4.jpg",
+    "thumbnail": "https://res.cloudinary.com/wandabodnar/image/upload/v1556281460/Japan%202/DSC_0108_4.jpg"
+  }, {
+    "lat": 35.1846144,
+    "lng": 136.8989358,
+    "url": "https://res.cloudinary.com/wandabodnar/image/upload/c_scale,w_5333/v1556282052/Japan%202/DSC_0134_3.jpg",
+    "thumbnail": "https://res.cloudinary.com/wandabodnar/image/upload/c_scale,w_5333/v1556282052/Japan%202/DSC_0134_3.jpg"
+  }, {
+    "lat": 35.3707276,
+    "lng": 136.4598982,
+    "url": "https://res.cloudinary.com/wandabodnar/image/upload/v1556282279/Japan%202/DSC_0172_2.jpg",
+    "thumbnail": "https://res.cloudinary.com/wandabodnar/image/upload/v1556282279/Japan%202/DSC_0172_2.jpg"
+  }, {
+    "lat": 34.9352667,
+    "lng": 135.7624147,
+    "url": "https://res.cloudinary.com/wandabodnar/image/upload/v1556282717/Japan%202/DSC_0189_2.jpg",
+    "thumbnail": "https://res.cloudinary.com/wandabodnar/image/upload/v1556282717/Japan%202/DSC_0189_2.jpg"
+  }, {
+    "lat": 34.9289333,
+    "lng": 135.7592624,
+    "url": "https://res.cloudinary.com/wandabodnar/image/upload/a_auto_right/v1556282820/Japan%202/DSC_0207_1.jpg",
+    "thumbnail": "https://res.cloudinary.com/wandabodnar/image/upload/a_auto_right/v1556282820/Japan%202/DSC_0207_1.jpg"
+  }, {
+    "lat": 34.9367989,
+    "lng": 135.758983,
+    "url": "https://res.cloudinary.com/wandabodnar/image/upload/a_auto_right/v1556282997/Japan%202/DSC_0213_1.jpg",
+    "thumbnail": "https://res.cloudinary.com/wandabodnar/image/upload/a_auto_right/v1556282997/Japan%202/DSC_0213_1.jpg"
+  }, {
+    "lat": 35.0585372,
+    "lng": 135.7402205,
+    "url": "https://res.cloudinary.com/wandabodnar/image/upload/v1556283432/Japan%202/DSC_0224_1.jpg",
+    "thumbnail": "https://res.cloudinary.com/wandabodnar/image/upload/v1556283432/Japan%202/DSC_0224_1.jpg"
+  }, {
+    "lat": 35.0438806,
+    "lng": 135.7608705,
+    "url": "https://res.cloudinary.com/wandabodnar/image/upload/v1556283687/Japan%202/DSC_0231_1.jpg",
+    "thumbnail": "https://res.cloudinary.com/wandabodnar/image/upload/v1556283687/Japan%202/DSC_0231_1.jpg"
+  }, {
+    "lat": 35.0244622,
+    "lng": 135.7605757,
+    "url": "https://res.cloudinary.com/wandabodnar/image/upload/v1556283823/Japan%202/DSC_0247_1.jpg",
+    "thumbnail": "https://res.cloudinary.com/wandabodnar/image/upload/v1556283823/Japan%202/DSC_0247_1.jpg"
+  }, {
+    "lat": 34.671973,
+    "lng": 135.499371,
+    "url": "https://res.cloudinary.com/wandabodnar/image/upload/a_auto_right/v1557596305/Japan%202/DSC_0323_1.jpg",
+    "thumbnail": "https://res.cloudinary.com/wandabodnar/image/upload/a_auto_right/v1557596305/Japan%202/DSC_0323_1.jpg"
+  }, {
+    "lat": 34.687698,
+    "lng": 135.525493,
+    "url": "https://res.cloudinary.com/wandabodnar/image/upload/v1557596549/Japan%202/DSC_0314_1.jpg",
+    "thumbnail": "https://res.cloudinary.com/wandabodnar/image/upload/v1557596549/Japan%202/DSC_0314_1.jpg"
+  }, {
+    "lat": 34.668157,
+    "lng": 135.502361,
+    "url": "https://res.cloudinary.com/wandabodnar/image/upload/v1557596754/Japan%202/DSC_0337_1.jpg",
+    "thumbnail": "https://res.cloudinary.com/wandabodnar/image/upload/v1557596754/Japan%202/DSC_0337_1.jpg"
+  }, {
+    "lat": 36.238333,
+    "lng": 137.968056,
+    "url": "https://res.cloudinary.com/wandabodnar/image/upload/v1557596994/Japan%202/IMG_20190416_165923_823.jpg",
+    "thumbnail": "https://res.cloudinary.com/wandabodnar/image/upload/v1557596994/Japan%202/IMG_20190416_165923_823.jpg"
+  }, {
+    "lat": 36.027194,
+    "lng": 138.077629,
+    "url": "https://res.cloudinary.com/wandabodnar/image/upload/v1557597218/Japan%202/DSC_0008_4.jpg",
+    "thumbnail": "https://res.cloudinary.com/wandabodnar/image/upload/v1557597218/Japan%202/DSC_0008_4.jpg"
+  }, {
+    "lat": 35.474248,
+    "lng": 138.575446,
+    "url": "https://res.cloudinary.com/wandabodnar/image/upload/v1557597369/Japan%202/DSC_0015_5.jpg",
+    "thumbnail": "https://res.cloudinary.com/wandabodnar/image/upload/v1557597369/Japan%202/DSC_0015_5.jpg"
+  }, {
+    "lat": 35.522484,
+    "lng": 138.754034,
+    "url": "https://res.cloudinary.com/wandabodnar/image/upload/v1557597573/Japan%202/DSC_0024_5.jpg",
+    "thumbnail": "https://res.cloudinary.com/wandabodnar/image/upload/v1557597573/Japan%202/DSC_0024_5.jpg"
+  }, {
+    "lat": 35.501424,
+    "lng": 138.801546,
+    "url": "https://res.cloudinary.com/wandabodnar/image/upload/v1557597796/Japan%202/DSC_0045_5.jpg",
+    "thumbnail": "https://res.cloudinary.com/wandabodnar/image/upload/v1557597796/Japan%202/DSC_0045_5.jpg"
+  }, {
+    "lat": 35.426851,
+    "lng": 138.871452,
+    "url": "https://res.cloudinary.com/wandabodnar/image/upload/v1557598029/Japan%202/DSC_0085_2.jpg",
+    "thumbnail": "https://res.cloudinary.com/wandabodnar/image/upload/v1557598029/Japan%202/DSC_0085_2.jpg"
+  }, {
+    "lat": 35.710284,
+    "lng": 139.800785,
+    "url": "https://res.cloudinary.com/wandabodnar/image/upload/v1557598218/Japan%202/DSC_0043_6.jpg",
+    "thumbnail": "https://res.cloudinary.com/wandabodnar/image/upload/v1557598218/Japan%202/DSC_0043_6.jpg"
+  }, {
+    "lat": 35.6969542,
+    "lng": 139.80026,
+    "url": "https://res.cloudinary.com/wandabodnar/image/upload/v1557598413/Japan%202/DSC_0048_5.jpg",
+    "thumbnail": "https://res.cloudinary.com/wandabodnar/image/upload/v1557598413/Japan%202/DSC_0048_5.jpg"
+  }, {
+    "lat": 35.714641,
+    "lng": 139.796413,
+    "url": "https://res.cloudinary.com/wandabodnar/image/upload/v1557598557/Japan%202/IMG_20190419_121110_502.jpg",
+    "thumbnail": "https://res.cloudinary.com/wandabodnar/image/upload/v1557598557/Japan%202/IMG_20190419_121110_502.jpg"
+  },
+  {
+    "lat": 58.9608169,
+    "lng": 18.3131738,
+    "url": "https://res.cloudinary.com/wandabodnar/image/upload/v1578057525/Other/Uta.jpg",
+    "thumbnail": "https://res.cloudinary.com/wandabodnar/image/upload/v1578057525/Other/Uta.jpg"
+  },
+  {
+    "lat": 59.3312878,
+    "lng": 18.0938122,
+    "url": "https://res.cloudinary.com/wandabodnar/image/upload/v1578057751/Other/Stockholm.jpg",
+    "thumbnail": "https://res.cloudinary.com/wandabodnar/image/upload/v1578057751/Other/Stockholm.jpg"
+  },
+  {
+    "lat": 50.916605,
+    "lng": 0.981749,
+    "url": "https://res.cloudinary.com/wandabodnar/image/upload/v1578058098/Other/DSC_0412.jpg",
+    "thumbnail": "https://res.cloudinary.com/wandabodnar/image/upload/v1578058098/Other/DSC_0412.jpg"
+  },
+  {
+    "lat": 50.820772,
+    "lng": -0.151219,
+    "url": "https://res.cloudinary.com/wandabodnar/image/upload/v1578058430/Other/Brighton.jpg",
+    "thumbnail": "https://res.cloudinary.com/wandabodnar/image/upload/v1578058430/Other/Brighton.jpg"
+  },
+  {
+    "lat": 47.500114,
+    "lng": 19.042903,
+    "url": "https://res.cloudinary.com/wandabodnar/image/upload/v1578058654/Other/Budapest.jpg",
+    "thumbnail": "https://res.cloudinary.com/wandabodnar/image/upload/v1578058654/Other/Budapest.jpg"
+  },
+  {
+    "lat": 46.8906228,
+    "lng": 17.8746947,
+    "url": "https://res.cloudinary.com/wandabodnar/image/upload/v1578058984/Balaton.jpg",
+    "thumbnail": "https://res.cloudinary.com/wandabodnar/image/upload/v1578058984/Balaton.jpg"
+  },
+  {
+    "lat": 43.283990,
+    "lng": 5.370707,
+    "url": "https://res.cloudinary.com/wandabodnar/image/upload/v1578059251/Other/Marsielle.jpg",
+    "thumbnail": "https://res.cloudinary.com/wandabodnar/image/upload/v1578059251/Other/Marsielle.jpg"
+  },
+  {
+    "lat": 43.550988,
+    "lng": 7.010427,
+    "url": "https://res.cloudinary.com/wandabodnar/image/upload/v1578059713/Cannes.jpg",
+    "thumbnail": "https://res.cloudinary.com/wandabodnar/image/upload/v1578059713/Cannes.jpg"
+  },
+  {
+    "lat": 43.550988,
+    "lng": 7.010427,
+    "url": "https://res.cloudinary.com/wandabodnar/image/upload/v1578059713/Cannes.jpg",
+    "thumbnail": "https://res.cloudinary.com/wandabodnar/image/upload/v1578059713/Cannes.jpg"
+  },
+  {
+    "lat": 40.571025,
+    "lng": -73.983609,
+    "url": "https://res.cloudinary.com/wandabodnar/image/upload/v1578060408/NYC/DSC_0251.jpg",
+    "thumbnail": "https://res.cloudinary.com/wandabodnar/image/upload/v1578060408/NYC/DSC_0251.jpg"
+  }
+];
+
+var photoLayer = L.photo.cluster().on('click', function(evt) {
+  var photo = evt.layer.photo;
+  var template = '<img src={thumbnail} height="200" width="auto"/>';
+  evt.layer.bindPopup(L.Util.template(template, photo)).openPopup();
+});
+
+photoLayer.add(photos).addTo(map);
+
+var home = {
+    lat: 35,
+    lng: 15,
+    zoom: 2
+  };
+  L.easyButton('<i class="fas fa-passport"></i>', function() {
+    map.setView([home.lat, home.lng], home.zoom);
+  }, 'Home').addTo(map);
+
+    </script>
+
+  </body>
+
+</html>
