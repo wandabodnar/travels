@@ -55,8 +55,9 @@
   zoom: 2
 });
 
-L.tileLayer('http://a.tiles.mapbox.com/v4/mapbox.satellite/{z}/{x}/{y}.png?access_token=pk.eyJ1Ijoid2FuZGFib2RuYXIiLCJhIjoiY2p0NXU3djg5MDNrZzN6bnpoaGx6MmMzMCJ9.1ZSsBHP1VNrORNIN_p0_Xg',
-{maxZoom: 19, minZoom: 2, attribution: '&copy; <a href="https://www.linkedin.com/in/wandabodnar/">Wanda Bodnar</a>'}).addTo(map);
+L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+	attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+}).addTo(map);
 
 var photos = [{
     "lat": 73.31503,
